@@ -12,14 +12,17 @@ class Data {
 	boolean flag;
 	Lock lock = new ReentrantLock();
 //	获取condition对象
-	Condition con = lock.newCondition();
+//	Condition con = lock.newCondition();
+	Condition producer_con = lock.newCondition();
+	Condition consumer_con = lock.newCondition();
 	public void write(String name) {
 		lock.lock();
 
 		try{
 			while(flag) {
 				try {
-					con.await();
+//					con.await();
+					producer_con.await();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -29,7 +32,8 @@ class Data {
 			System.out.println(Thread.currentThread().getName() + "product" + this.name);
 
 			flag = true;
-			con.signalAll();
+//			con.signalAll();
+			consumer_con.signal();
 		}
 		finally {
 			lock.unlock();
@@ -41,7 +45,8 @@ class Data {
 		try{
 			while(!flag) {
 				try {
-					con.await();
+//					con.await();
+					consumer_con.await();
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -49,7 +54,8 @@ class Data {
 			}
 			System.out.println(Thread.currentThread().getName() + "consumer--------" + this.name);
 			flag = false;
-			con.signalAll();
+//			con.signalAll();
+			producer_con.signal();
 		}
 		finally {
 			lock.unlock();
