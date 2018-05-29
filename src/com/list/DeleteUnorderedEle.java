@@ -82,7 +82,7 @@ class Node {
 	public Node() {
 		
 	}
-	public Node create(int[] arr) {
+	public static Node create(int[] arr) {
 		if(arr == null || arr.length == 0) {
 			return null;
 		}
@@ -100,11 +100,25 @@ class Node {
 		return head;
 	}
 	
-	public void print(Node head) {
+	public static void print(Node head) {
 		Node cur = head;
 		while(cur != null) {
 			System.out.print(cur.value + "  ");
 			cur = cur.next;
 		}
+	}
+	
+	public static int len(Node head) {
+		if (head == null) {
+			return 0;
+		}
+		
+		int length = 0;
+		Node cur = head;
+		while(cur != null) {
+			length++;
+			cur = cur.next;
+		}
+		return length;
 	}
 }
