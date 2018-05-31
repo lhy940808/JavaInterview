@@ -90,13 +90,18 @@ class Node {
 		//β�巨
 		Node head = new Node(arr[0]);
 		Node r = head;
+		Node thirdNode = null;
 		for(int i = 1; i < arr.length; i++) {
 			Node cur = new Node(arr[i]);
+			if (i == 2) {
+				thirdNode = cur;
+			}
 			r.next = cur;
 			r = cur;
 		}
 		
 		r.next = null;
+//		r.next = thirdNode;
 		return head;
 	}
 	
