@@ -27,7 +27,8 @@ public class QuickSort {
 	}*/
 	
 	public static void main(String[] args){
-		int[] data = {5,3,1,8,2,4};
+//		int[] data = {5,3,1,8,2,4};
+		int[] data = {5,4,3,2,1};
 		new QuickSort().sort(data, 0, data.length - 1);
 		for(int i = 0; i < data.length; i++) {
 			System.out.print(data[i] + "  ");
